@@ -1,33 +1,10 @@
-// src/components/Hero.tsx
-
 const Hero = ({ onOpenModal }: { onOpenModal: () => void }) => (
-  <section id="hero" className="hero" style={{position: 'relative', overflow: 'hidden'}}>
-    {/* ==== Video Background ==== */}
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="hero-bg-video"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        zIndex: 0,
-        opacity: 0.35, // optional: adjust for darkness
-        pointerEvents: 'none'
-      }}
-    >
-      <source src="/bg-video.mp4" type="video/mp4" />
-      {/* Fallback for unsupported browsers */}
-      Your browser does not support the video tag.
-    </video>
-
-    {/* ==== Hero Content ==== */}
-    <div className="container" style={{position: 'relative', zIndex: 1}}>
+  <section id="hero" className="hero">
+    <div className="container">
+      <h1 className="place-self-center">The <span className="gradient-text">Easy Way</span> to Buy & Sell Event Tickets</h1>
+      <p className="description">
+        Stop scrolling through messy group chats and endless DMs. Voutch is the simple, secure marketplace for students at your school to find and sell tickets for the best campus events.
+      </p>
       <div className="cta-buttons">
         <button className="btn btn-primary" onClick={onOpenModal}>Buy a Ticket</button>
         <button className="btn btn-secondary" onClick={onOpenModal}>Sell a Ticket</button>
@@ -35,5 +12,4 @@ const Hero = ({ onOpenModal }: { onOpenModal: () => void }) => (
     </div>
   </section>
 );
-
 export default Hero;

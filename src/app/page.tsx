@@ -9,6 +9,7 @@ import Hero from "./components/Hero";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import WaitlistModal from "./components/WaitlistModal";
+import VideoSection from "./components/VideoSection";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <VideoSection />
       <main>
         <Hero onOpenModal={() => setModalOpen(true)} />
         <HowItWorks />
