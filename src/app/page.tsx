@@ -17,9 +17,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <VideoSection />
+      <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
-        <Hero onOpenModal={() => setModalOpen(true)} />
+        <Hero />
         <HowItWorks />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
