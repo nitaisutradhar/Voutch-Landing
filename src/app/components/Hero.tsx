@@ -27,16 +27,16 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal }) => (
       </div>
     </div>
     {/* --- Content --- */}
-    <div className="z-10">
+    <div className="z-10 p-3">
       <motion.h1
-        className="text-5xl md:text-6xl font-bold leading-tight mb-6"
+        className="text-lg sm:text-5xl md:text-6xl font-bold leading-tight mb-6"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
       >
         The <span className="bg-gradient-to-r from-fuchsia-700 via-pink-500 to-orange-400 bg-clip-text text-transparent">Easy Way</span> to Buy & Sell Event Tickets
       </motion.h1>
       <motion.p
-        className="text-lg text-gray-100 mb-8 max-w-xl mx-auto"
+        className="hidden sm:block text-[10px] md:text-lg text-gray-100 mb-8 max-w-xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
