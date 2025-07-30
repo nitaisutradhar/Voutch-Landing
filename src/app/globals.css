@@ -1,36 +1,457 @@
 @import "tailwindcss";
 
-.btn {
-  @apply inline-block px-6 py-3 rounded-full font-semibold text-base text-center cursor-pointer border-none transition-transform duration-200;
-}
-.btn-primary {
-  @apply bg-gradient-to-r from-fuchsia-700 via-pink-500 to-orange-400 text-white shadow hover:-translate-y-1;
-}
-.btn-secondary {
-  @apply bg-transparent text-white border-2 border-[#17162B] hover:bg-[#17162B] shadow hover:-translate-y-1;
-}
-/* 
+/* --- 1. Global Styles & Variables --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #0d0c1d; /* Deep navy blue */
+  --color-surface: #17162b; /* Slightly lighter surface color */
+  --color-primary-text: #f0f2f5;
+  --color-secondary-text: #a8a7b1;
+  --font-primary: "Poppins", sans-serif;
+  --gradient-primary: linear-gradient(90deg, #8a2387, #e94057, #f27121);
+  --gradient-secondary: linear-gradient(90deg, #4a00e0, #8e2de2);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-primary-text);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated background gradient effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 15% 25%,
+      rgba(138, 35, 135, 0.15),
+      transparent 30%
+    ),
+    radial-gradient(circle at 85% 75%, rgba(74, 0, 224, 0.15), transparent 40%);
+  z-index: -1;
+  animation: pulse-glow 15s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- 2. Typography & Links --- */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+p {
+  color: var(--color-secondary-text);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--color-secondary-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-primary-text);
+}
+
+/* --- 3. Buttons --- */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 4px 20px rgba(233, 64, 87, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 30px rgba(233, 64, 87, 0.5);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary-text);
+  border: 2px solid var(--color-surface);
+}
+
+.btn-secondary:hover {
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  transform: translateY(-3px);
+}
+
+/* --- 4. Header --- */
+.header {
+  padding: 2rem 0;
+}
+
+.header .container {
+  display: flex;
+  justify-content: center; /* Centered logo for this simple MVP */
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+}
+
+/* --- 5. Hero Section --- */
+.hero {
+  text-align: center;
+  padding: 6rem 0;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h1 {
+  max-width: 800px;
+}
+
+.hero .description {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 1.5rem auto 2.5rem;
+}
+
+.hero .cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- 6. How It Works Section --- */
+.how-it-works {
+  padding: 6rem 0;
+}
+
+.how-it-works h2 {
+  margin-bottom: 4rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.step-card {
+  background: var(--color-surface);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.step-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.icon-gradient {
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  /* Masking trick */
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.step-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary-text);
+}
+
+.step-card p {
+  font-size: 0.95rem;
+}
+
+/* --- 7. Final CTA Section --- */
+.final-cta {
+  text-align: center;
+  padding: 6rem 0;
+  background: var(--color-surface);
+  border-radius: 20px;
+  margin: 4rem 0;
+}
+
+.final-cta h2 {
+  margin-bottom: 1rem;
+}
+
+.final-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta .cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- 8. Footer --- */
+.footer {
+  padding: 3rem 0;
+  text-align: center;
+  border-top: 1px solid var(--color-surface);
+}
+
+.footer p {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  margin: 0 1rem;
+}
+
+/* --- 9. Waitlist Modal --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 11, 30, 0.7);
+  backdrop-filter: blur(10px);
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  padding: 3rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--color-secondary-text);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--color-primary-text);
+  transform: rotate(90deg);
+}
+
+.modal-step {
+  display: none; /* Hide all steps initially */
+}
+
+.modal-step.active {
+  display: block;
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary-text);
+}
+
+.modal-content p {
+  margin-bottom: 2rem;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Form Styling */
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  background: var(--color-background);
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: var(--color-primary-text);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--color-secondary-text);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #8e2de2;
+  box-shadow: 0 0 0 3px rgba(142, 45, 226, 0.3);
+}
+
+.waitlist-form .btn-primary {
+  margin-top: 1rem;
+}
+
+/* Confirmation Step Styling */
+.confirmation-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* --- 10. Responsive Design --- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.8rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  .hero {
+    padding: 4rem 0;
+  }
+  .hero .description {
+    font-size: 1rem;
+  }
+  .btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.9rem;
+  }
+  .final-cta {
+    margin: 2rem 1rem;
+  }
+  .modal-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero .cta-buttons,
+  .final-cta .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn {
+    width: 100%;
+  }
+}

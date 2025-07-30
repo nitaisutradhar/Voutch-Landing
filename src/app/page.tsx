@@ -11,18 +11,18 @@ import Footer from "./components/Footer";
 import WaitlistModal from "./components/WaitlistModal";
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen font-[Poppins] bg-[#0D0C1D] text-white relative">
+    <>
       <Header />
       <main>
-        <Hero onOpenModal={() => setShowModal(true)} />
+        <Hero onOpenModal={() => setModalOpen(true)} />
         <HowItWorks />
-        <FinalCTA onOpenModal={() => setShowModal(true)} />
+        <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
       <Footer />
-      <WaitlistModal isOpen={showModal} onClose={() => setShowModal(false)} />
-    </div>
+      <WaitlistModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </>
   );
 }
