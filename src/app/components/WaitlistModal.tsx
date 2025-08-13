@@ -70,9 +70,6 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
               >
                 Yes, I&apos;m Interested!
               </button>
-              <button className="btn btn-secondary modal-close" onClick={onClose}>
-                Not right now
-              </button>
             </div>
           </div>
         )}
@@ -94,7 +91,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
               autoComplete="off"
             >
               <div className="form-group">
-                <input type="text" name="name" placeholder="Name (Optional)" />
+                <input type="text" name="name" placeholder="Name" />
               </div>
               <div className="form-group">
                 <input
@@ -107,8 +104,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
               <div className="form-group">
                 <input
                   type="text"
-                  name="school"
-                  placeholder="What school do you attend? (Optional)"
+                  name="phone"
+                  placeholder="Phone Number (Optional)"
                 />
               </div>
               <button type="submit" className="btn btn-primary">
