@@ -10,6 +10,7 @@ import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import WaitlistModal from "./components/WaitlistModal";
 import VideoSection from "./components/VideoSection";
+import CardSection from "./components/CardSection";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function Home() {
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
         <Hero />
+        <CardSection />
         <HowItWorks />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
