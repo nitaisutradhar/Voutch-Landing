@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import WaitlistForm from "./WaitlistForm";
 
 interface WaitlistModalProps {
   open: boolean;
@@ -7,7 +8,11 @@ interface WaitlistModalProps {
   setUserData: (data: { name: string; email: string; phone: string }) => void;
 }
 
-const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose, setUserData }) => {
+const WaitlistModal: React.FC<WaitlistModalProps> = ({
+  open,
+  onClose,
+  setUserData,
+}) => {
   // Modal Step: 1=Interest, 2=Form, 3=Confirmation
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
@@ -62,8 +67,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose, setUserDat
           <div id="modal-step-1" className="modal-step active">
             <h3>Awesome! Are you interested?</h3>
             <p>
-              Let us know if you&apos;d use Voutch to buy or sell tickets more easily
-              on campus.
+              Let us know if you&apos;d use Voutch to buy or sell tickets more
+              easily on campus.
             </p>
             <div className="modal-buttons">
               <button
@@ -79,46 +84,12 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose, setUserDat
 
         {/* Step 2: Waitlist Form */}
         {step === 2 && (
-          <div id="modal-step-2" className="modal-step active">
-            <h3>Great! Voutch is Launching Soon.</h3>
-            <p>
-              Join the official waitlist to get exclusive early access and be the
-              first to know when we&apos;re live.
-            </p>
-            <form
-              id="waitlist-form"
-              className="waitlist-form"
-              action="#"
-              method="POST"
-              onSubmit={handleSubmit}
-              autoComplete="off"
-            >
-              <div className="form-group">
-                <input type="text" name="name" placeholder="Name"
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone Number (Optional)"
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Join the Waitlist
-              </button>
-            </form>
+          <div id="modal-step-2">
+            <WaitlistForm 
+              form={form}
+              setForm={setForm}
+              handleSubmit={handleSubmit}
+            />
           </div>
         )}
 
@@ -130,8 +101,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose, setUserDat
             </div>
             <h3>You&apos;re on the list!</h3>
             <p>
-              Thanks for signing up. We&apos;ll be in touch soon with updates. Keep an
-              eye on your inbox!
+              Thanks for signing up. We&apos;ll be in touch soon with updates.
+              Keep an eye on your inbox!
             </p>
             <button className="btn btn-primary" onClick={onClose}>
               Got it!

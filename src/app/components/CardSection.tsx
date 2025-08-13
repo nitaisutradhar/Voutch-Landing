@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { cardData } from "../data/cardData";
+import WaitlistForm from "./WaitlistForm";
 export interface Card {
   id: number;
   imgSrc: string;
@@ -18,16 +19,38 @@ interface CardSectionProps {
     email: string;
     phone: string;
   };
+  setUserData: (data: { name: string; email: string; phone: string }) => void;
 }
 
-const CardSection = ({ userData }: CardSectionProps) => {
+const CardSection = ({ userData, setUserData }: CardSectionProps) => {
   const [alertCard, setAlertCard] = useState<Card | null>(null);
+  
+   const [form, setForm] = useState({
+  name: userData.name || "",
+  email: userData.email || "",
+  phone: userData.phone || ""
+});
+
+useEffect(() => {
+  setForm({
+    name: userData.name || "",
+    email: userData.email || "",
+    phone: userData.phone || ""
+  });
+}, [userData]);
 
   const handleViewEvent = (card: Card) => {
     setAlertCard(card);
   };
   const handleCloseAlert = () => {
     setAlertCard(null);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setUserData(form);
+    handleCloseAlert();
   };
 
   return (
@@ -97,41 +120,12 @@ const CardSection = ({ userData }: CardSectionProps) => {
       {alertCard && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
           <div className="modal-content">
-        <i className="fa-solid fa-times modal-close" onClick={handleCloseAlert}></i>
-            <div id="modal-step-3" className="modal-step active">
-              <h3>You&apos;re on the list!</h3>
-              <div>
-                <p className="text-sm text-gray-500">
-                Event Name: {alertCard.eventName}
-              </p>
-              <p className="text-sm text-gray-500">
-                Date: {alertCard.date}
-              </p>
-              <p className="text-sm text-gray-500">
-                Location: {alertCard.location}
-              </p>
-              </div>
-              {/* User Data */}
-              <div>
-                <p className="text-sm text-gray-500">
-                  Name: {userData.name || "N/A"}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Email: {userData.email || "N/A"}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Phone: {userData.phone || "N/A"}
-                </p>
-              </div>
-              
-              <p>
-                Thanks for your interest! We&apos;ll be in touch soon with updates. Keep an
-                eye on your inbox!
-              </p>
-              <button className="btn btn-primary" onClick={handleCloseAlert}>
-                Got it!
-              </button>
-            </div>
+            <i className="fa-solid fa-times modal-close" onClick={handleCloseAlert}></i>
+            <WaitlistForm
+              form={form}
+              setForm={setForm}
+              handleSubmit={ handleSubmit}
+            />
           </div>
         </div>
       )}

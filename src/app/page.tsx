@@ -21,7 +21,6 @@ export default function Home() {
     email: "",
     phone: ""
   });
-  console.log("User Data:", userData);
 
   return (
     <>
@@ -29,7 +28,7 @@ export default function Home() {
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
         <Hero />
-        <CardSection userData={userData} />
+        <CardSection userData={userData} setUserData={setUserData} />
         <HowItWorks />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
