@@ -32,20 +32,23 @@ const CardSection = () => {
 
   return (
     <section className="py-12 bg-transparent">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {cardData.map((card) => (
             <div
               key={card.id}
-              className="bg-[var(--color-surface)] gap-2 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2.5 transition-transform duration-300 border border-white/10 flex flex-col"
+              style={{ margin: "5px" }}
+              className="gap-2 rounded-sm shadow-lg overflow-hidden transform hover:-translate-y-2.5 transition-transform duration-300 border border-white/10 flex flex-col"
             >
-              <div className="relative h-60 w-full">
+              <div className="relative w-full">
                 <Image
                   src={card.imgSrc}
                   alt={card.eventName}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  width={320}
+                  height={420}
+                  className="aspect-320/420 w-full h-full object-cover"
+                  sizes="(max-width: 420px) 100vw, (max-width: 320px) 50vw, 33vw"
                   style={{ objectFit: "cover" }}
                 />
               </div>
@@ -53,26 +56,26 @@ const CardSection = () => {
               {/* Content Section */}
               <div
                 style={{ padding: "10px" }}
-                className="flex flex-col flex-grow text-left gap-1.5"
+                className="flex flex-col flex-grow text-left gap-1"
               >
                 <h3
-                  className="text-lg font-bold text-[var(--color-primary-text)] my-2 truncate"
+                  className="text-[20px] font-bold text-[var(--color-primary-text)] truncate"
                   title={card.eventName}
                 >
                   {card.eventName}
                 </h3>
-                <div className="text-sm text-[var(--color-secondary-text)] mb-1 flex items-center gap-2">
+                <div style={{ marginBottom: "5px"}} className="text-sm text-white flex items-center gap-2">
                   <i className="fa-solid fa-calendar-days w-4 text-center"></i>
                   <span>{card.date}</span>
                 </div>
-                <div className="text-sm text-[var(--color-secondary-text)] mb-4 flex items-center gap-2">
+                <div style={{ marginBottom: "5px"}} className="text-sm text-white flex items-center gap-2">
                   <i className="fa-solid fa-location-dot w-4 text-center"></i>
                   <span>{card.location}</span>
                 </div>
                 <div className="mt-auto pt-2">
                   <button
                     style={{ padding: "5px 10px" }}
-                    className="btn text-black bg-white rounded-full border-2 border-gray-400 text-sm hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer"
+                    className="btn text-black bg-white rounded-full border-2 border-gray-400 text-[13px] hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer"
                     onClick={() => handleViewEvent(card)}
                   >
                     {card.button.text}
