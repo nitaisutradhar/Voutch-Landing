@@ -15,18 +15,26 @@ import CardSection from "./components/CardSection";
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
+    // Shared data
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone: ""
+  });
+  console.log("User Data:", userData);
+
   return (
     <>
       <Header />
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
         <Hero />
-        <CardSection />
+        <CardSection userData={userData} />
         <HowItWorks />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
       <Footer />
-      <WaitlistModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }

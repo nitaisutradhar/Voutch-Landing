@@ -4,11 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 interface WaitlistModalProps {
   open: boolean;
   onClose: () => void;
+  setUserData: (data: { name: string; email: string; phone: string }) => void;
 }
 
-const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
+const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose, setUserData }) => {
   // Modal Step: 1=Interest, 2=Form, 3=Confirmation
   const [step, setStep] = useState(1);
+  const [form, setForm] = useState({ name: "", email: "", phone: "" });
 
   // Ref for modal, to handle click outside
   const modalRef = useRef<HTMLDivElement>(null);
@@ -36,6 +38,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
   // Form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setUserData(form); // save to parent
     setStep(3);
   };
 
@@ -91,13 +94,16 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
               autoComplete="off"
             >
               <div className="form-group">
-                <input type="text" name="name" placeholder="Name" />
+                <input type="text" name="name" placeholder="Name"
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
               </div>
               <div className="form-group">
                 <input
                   type="email"
                   name="email"
                   placeholder="Email Address"
+                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
                 />
               </div>
@@ -106,6 +112,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
                   type="text"
                   name="phone"
                   placeholder="Phone Number (Optional)"
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 />
               </div>
               <button type="submit" className="btn btn-primary">
@@ -126,7 +133,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onClose }) => {
               Thanks for signing up. We&apos;ll be in touch soon with updates. Keep an
               eye on your inbox!
             </p>
-            <button className="btn btn-primary modal-close" onClick={onClose}>
+            <button className="btn btn-primary" onClick={onClose}>
               Got it!
             </button>
           </div>
