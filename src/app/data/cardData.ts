@@ -17,7 +17,7 @@ export const cardData: Card[] = [
     eventName: 'COLUMBUS WEEKEND',
     date: 'September 11', 
     location: 'WASHINGTON D.C.',
-    button: { text: 'View Event', link: '#' },
+    button: { text: 'Join the Waitlist', link: '#' },
     },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const cardData: Card[] = [
     eventName: 'NIGHT SOCIETY PRESENTS',
     date: 'October 9',
     location: 'COLUMBUS',
-    button: { text: 'View Event', link: '#' },
+    button: { text: 'Join the Waitlist', link: '#' },
     },
   {
     id: 3,
@@ -33,7 +33,7 @@ export const cardData: Card[] = [
     eventName: 'THE WHITE PARTY',
     date: 'AUGUST 26',
     location: 'WASHINGTON D.C.',
-    button: { text: 'View Event', link: '#' },
+    button: { text: 'Join the Waitlist', link: '#' },
   },
   {
     id: 4,
@@ -41,6 +41,6 @@ export const cardData: Card[] = [
     eventName: 'NIGHT SOCIETY & UNLIMITED PRESENTS',
     date: 'AUGUST 30',
     location: 'WASHINGTON D.C.',
-    button: { text: 'View Event', link: '#' },
+    button: { text: 'Join the Waitlist', link: '#' },
   },
 ];
