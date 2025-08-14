@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import WaitlistModal from "./components/WaitlistModal";
 import VideoSection from "./components/VideoSection";
 import CardSection from "./components/CardSection";
+import SSAnimationSection from "./components/SSAnimationSection";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function Home() {
         <CardSection userData={userData} setUserData={setUserData} />
         <HowItWorks />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
+        <SSAnimationSection />
       </main>
       <Footer />
       <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} />
