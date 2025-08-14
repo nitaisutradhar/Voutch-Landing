@@ -3,7 +3,27 @@ import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
 
-export default function SSAnimationSection() {
+export default function SSAnimationWrapper() {
+  return (
+    <section className="w-full h-auto bg-cover bg-center">
+      {/* Desktop / Medium+ */}
+      <div className="hidden md:flex w-full">
+        <DesktopScreenshots />
+      </div>
+
+      {/* Mobile / Small devices */}
+      <div className="flex md:hidden w-full overflow-hidden">
+        <MobileScreenshots />
+      </div>
+    </section>
+  );
+}
+
+// Desktop component (your existing animated version)
+const DesktopScreenshots = () => {
+  // ... insert your previous SSAnimationSection code here
+  // with scale animation and side screenshots bouncing
+  
   const controls1 = useAnimation();
   const controls3 = useAnimation();
 
@@ -45,9 +65,8 @@ export default function SSAnimationSection() {
 
     return () => clearInterval(cycle);
   }, [controls1, controls3]);
-
   return (
-    <section
+     <section
       className="w-full h-auto bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: "url('/ss/ss-bg.png')",
@@ -108,4 +127,26 @@ export default function SSAnimationSection() {
       </div>
     </section>
   );
-}
+};
+
+// Mobile component (auto-sliding carousel)
+const MobileScreenshots = () => {
+  return (
+    <motion.div
+      className="flex flex-row gap-4 w-full"
+      animate={{ x: ["0%", "-100%", "-200%"] }}
+      transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+    >
+      {[1, 2, 3, 1, 2, 3].map((n, i) => (
+        <div key={i} className="relative w-64 flex-shrink-0 aspect-[370/800]">
+          <Image
+            src={`/ss/ss${n}.jpeg`}
+            alt={`Screenshot ${n}`}
+            fill
+            className="object-contain rounded-xl shadow-lg"
+          />
+        </div>
+      ))}
+    </motion.div>
+  );
+};
