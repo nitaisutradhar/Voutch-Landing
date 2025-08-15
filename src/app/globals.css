@@ -7,7 +7,8 @@
   --color-primary-text: #f0f2f5;
   --color-secondary-text: #a8a7b1;
   --font-primary: "Poppins", sans-serif;
-  --gradient-primary: linear-gradient(90deg, #8a2387, #e94057, #f27121);
+  /* --gradient-primary: linear-gradient(90deg, #8a2387, #e94057, #f27121); */
+  --gradient-primary: #f94e28; /* Vibrant orange */
   --gradient-secondary: linear-gradient(90deg, #4a00e0, #8e2de2);
 }
 
@@ -221,7 +222,7 @@ a:hover {
 .step-card .icon {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  background: var(--gradient-secondary);
+  /* background: var(--gradient-secondary); */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

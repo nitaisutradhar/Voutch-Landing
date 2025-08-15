@@ -29,8 +29,8 @@ export default function Home() {
         <Hero />
         <CardSection userData={userData} setUserData={setUserData} />
         <HowItWorks />
-        <FinalCTA onOpenModal={() => setModalOpen(true)} />
         <SSAnimationSection />
+        <FinalCTA onOpenModal={() => setModalOpen(true)} />
       </main>
       <Footer />
       <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} />

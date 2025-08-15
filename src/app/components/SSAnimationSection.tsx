@@ -72,7 +72,7 @@ const DesktopScreenshots = () => {
       //   backgroundImage: "url('/ss/ss-bg.png')",
       // }}
     >
-      <div style={{ padding: "100px" }} className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-10 p-12 md:p-24">
+      <div style={{ padding: "40px" }} className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-10 p-12 md:p-24">
         {/* Screenshot 1 */}
         <motion.div
           initial={{ x: -150, opacity: 0 }}
