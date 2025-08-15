@@ -29,8 +29,8 @@ const DesktopScreenshots = () => {
 
   // Main animation cycle duration for Screenshot 2
   const cycleDuration = 4000; // ms
-  const pauseStart = 2400; // ms when scale=1.0 starts
-  const pauseEnd = 3600; // ms when scale=1.0 ends
+  const pauseStart = 2500; // ms when scale=1.0 starts
+  const pauseEnd = 3900; // ms when scale=1.0 ends
 
   useEffect(() => {
     const cycle = setInterval(() => {
