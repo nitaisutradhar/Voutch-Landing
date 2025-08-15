@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import WaitlistForm from "./WaitlistForm";
+import emailjs from "@emailjs/browser";
 
 interface WaitlistModalProps {
   open: boolean;
@@ -16,6 +17,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
   // Modal Step: 1=Interest, 2=Form, 3=Confirmation
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [status, setStatus] = useState<null | string>(null);
 
   // Ref for modal, to handle click outside
   const modalRef = useRef<HTMLDivElement>(null);
@@ -41,8 +43,34 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
   };
 
   // Form submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setStatus("sending");
+
+    try {
+      const res = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Public Key
+      );
+
+      if (res.status === 200) {
+        setStatus("success");
+        setForm({ name: "", email: "", phone: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
+
     setUserData(form); // save to parent
     setStep(3);
   };
@@ -85,10 +113,11 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
         {/* Step 2: Waitlist Form */}
         {step === 2 && (
           <div id="modal-step-2">
-            <WaitlistForm 
+            <WaitlistForm
               form={form}
               setForm={setForm}
               handleSubmit={handleSubmit}
+              status={status}
             />
           </div>
         )}

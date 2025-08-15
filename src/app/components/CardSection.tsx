@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { cardData } from "../data/cardData";
-import WaitlistForm from "./WaitlistForm";
+import WaitlistForm from "./Waitlist/WaitlistForm";
+import emailjs from "@emailjs/browser";
 export interface Card {
   id: number;
   imgSrc: string;
@@ -24,6 +25,7 @@ interface CardSectionProps {
 
 const CardSection = ({ userData, setUserData }: CardSectionProps) => {
   const [alertCard, setAlertCard] = useState<Card | null>(null);
+  const [status, setStatus] = useState<null | string>(null);
   
    const [form, setForm] = useState({
   name: userData.name || "",
@@ -47,8 +49,35 @@ useEffect(() => {
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =  async (e: React.FormEvent) => {
     e.preventDefault();
+
+        setStatus("sending");
+
+    try {
+      const res = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Public Key
+      );
+
+      if (res.status === 200) {
+        setStatus("success");
+        setForm({ name: "", email: "", phone: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
+
+
     setUserData(form);
     handleCloseAlert();
   };
@@ -126,6 +155,7 @@ useEffect(() => {
               form={form}
               setForm={setForm}
               handleSubmit={ handleSubmit}
+              status={status}
             />
           </div>
         </div>

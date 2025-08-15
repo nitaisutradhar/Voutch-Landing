@@ -7,7 +7,7 @@ import HowItWorks from "./components/HowItWorks";
 import Hero from "./components/Hero";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
-import WaitlistModal from "./components/WaitlistModal";
+import WaitlistModal from "./components/Waitlist/WaitlistModal";
 import VideoSection from "./components/VideoSection";
 import CardSection from "./components/CardSection";
 import SSAnimationSection from "./components/SSAnimationSection";

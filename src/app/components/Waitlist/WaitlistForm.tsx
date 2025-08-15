@@ -1,9 +1,10 @@
 
 
-const WaitlistForm = ({ form, setForm, handleSubmit }: {
+const WaitlistForm = ({ form, setForm, handleSubmit, status }: {
     form: { name: string; email: string; phone: string };
     setForm: (data: { name: string; email: string; phone: string }) => void;
     handleSubmit: (e: React.FormEvent) => void;
+    status: null | string;
   }) => {
     return (
         <div>
@@ -56,9 +57,11 @@ const WaitlistForm = ({ form, setForm, handleSubmit }: {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary">
-                  Join the Waitlist
+                  {status === "sending" ? "Joining..." : "Join the Waitlist"}
                 </button>
               </form>
+              {status === "success" && <p className="success-msg">🎉 You’re on the list!</p>}
+              {status === "error" && <p className="error-msg">❌ Something went wrong.</p>}
             </div>
         </div>
     );
