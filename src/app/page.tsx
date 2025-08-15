@@ -3,7 +3,6 @@
 "use client";
 
 import { useState } from "react";
-import Header from "./components/Header";
 import HowItWorks from "./components/HowItWorks";
 import Hero from "./components/Hero";
 import FinalCTA from "./components/FinalCTA";

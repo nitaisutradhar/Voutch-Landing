@@ -82,29 +82,29 @@ useEffect(() => {
                 className="flex flex-col flex-grow text-left gap-1"
               >
                 <h3
-                  className="text-[20px] font-bold text-[var(--color-primary-text)] truncate"
+                  className="text-[20px] font-bold truncate"
                   title={card.eventName}
                 >
                   {card.eventName}
                 </h3>
                 <div
                   style={{ marginBottom: "5px" }}
-                  className="text-sm text-white flex items-center gap-2"
+                  className="text-sm text-[var(--color-secondary-text)] flex items-center gap-2"
                 >
                   <i className="fa-solid fa-calendar-days w-4 text-center"></i>
                   <span>{card.date}</span>
                 </div>
                 <div
                   style={{ marginBottom: "5px" }}
-                  className="text-sm text-white flex items-center gap-2"
+                  className="text-sm text-[var(--color-secondary-text)] flex items-center gap-2"
                 >
                   <i className="fa-solid fa-location-dot w-4 text-center"></i>
                   <span>{card.location}</span>
                 </div>
                 <div className="mt-auto pt-2">
                   <button
-                    style={{ padding: "5px 10px" }}
-                    className="btn text-black bg-white rounded-full border-2 border-gray-400 text-[13px] hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer"
+                    style={{ padding: "5px 10px", border: "1px solid gray" }}
+                    className="btn text-black bg-white rounded-full text-[13px] hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer"
                     onClick={() => handleViewEvent(card)}
                   >
                     {card.button.text}
