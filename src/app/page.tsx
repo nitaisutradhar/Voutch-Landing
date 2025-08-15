@@ -25,7 +25,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
         <Hero />
