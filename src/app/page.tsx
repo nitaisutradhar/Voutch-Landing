@@ -2,7 +2,7 @@
 // Make this a Client Component!
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HowItWorks from "./components/HowItWorks";
 import Hero from "./components/Hero";
 import FinalCTA from "./components/FinalCTA";
@@ -14,7 +14,6 @@ import SSAnimationSection from "./components/SSAnimationSection";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
-    const [visits, setVisits] = useState<number | null>(null);
 
     // Shared data
   const [userData, setUserData] = useState({
@@ -24,16 +23,16 @@ export default function Home() {
   });
 
 
-useEffect(() => {
-  const increment = async () => {
-    const res = await fetch("/api/visitors", { method: "POST" });
-    const data = await res.json();
-    setVisits(data.count);
-  };
-  increment();
-}, []);
+//     const [visits, setVisits] = useState<number | null>(null);
+// useEffect(() => {
+//   const increment = async () => {
+//     const res = await fetch("/api/visitors", { method: "POST" });
+//     const data = await res.json();
+//     setVisits(data.count);
+//   };
+//   increment();
+// }, []);
 
-console.log("Visits:", visits);
 
   return (
     <>
