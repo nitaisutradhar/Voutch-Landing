@@ -43,9 +43,9 @@ useEffect(() => {
         </div>
         <Hero />
         <CardSection userData={userData} setUserData={setUserData} />
-        <HowItWorks />
-        <SSAnimationSection />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
+        <SSAnimationSection />
+        <HowItWorks />
       </main>
       <Footer />
       <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} />
