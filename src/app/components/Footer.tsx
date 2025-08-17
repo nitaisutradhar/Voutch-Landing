@@ -1,7 +1,7 @@
 const Footer = () => (
   <footer className="footer">
     <div className="container">
-      <p>© 2024 Voutch. For students, by students.</p>
+      <p>© 2025 Voutch. Developed by Softbeez.</p>
       <div className="footer-links">
         <a href="#">Contact Us</a>
         <a href="#">Privacy Policy</a>

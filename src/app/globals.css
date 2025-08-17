@@ -190,6 +190,7 @@ a:hover {
   justify-content: center;
 }
 
+
 /* --- 6. How It Works Section --- */
 .how-it-works {
   padding: 6rem 0;
@@ -445,5 +446,8 @@ a:hover {
   }
   .btn {
     width: 100%;
+  }
+  .cta-buttons .btn {
+  width: 60vw;
   }
 }
