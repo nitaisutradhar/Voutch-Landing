@@ -104,7 +104,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-primary-text);
+  color: var(--color-gradient-primary);
 }
 
 /* --- 3. Buttons --- */
@@ -307,7 +307,7 @@ a:hover {
 }
 
 .modal-content {
-  background: var(--color-surface);
+  /* background: var(--color-surface); */
   padding: 3rem;
   border-radius: 16px;
   width: 90%;
@@ -335,7 +335,7 @@ a:hover {
 }
 
 .modal-close:hover {
-  color: var(--color-primary-text);
+  color: var(--color-gradient-primary);
   transform: rotate(90deg);
 }
 
@@ -350,7 +350,7 @@ a:hover {
 .modal-content h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: var(--color-primary-text);
+  /* color: var(--color-primary-text); */
 }
 
 .modal-content p {
@@ -377,10 +377,10 @@ a:hover {
 .form-group input {
   width: 100%;
   padding: 1rem;
-  background: var(--color-background);
+  /* background: var(--color-background); */
   border: 1px solid #333;
   border-radius: 8px;
-  color: var(--color-primary-text);
+  /* color: var(--color-primary-text); */
   font-family: var(--font-primary);
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;

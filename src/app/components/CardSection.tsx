@@ -153,7 +153,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       {alertCard && (
         // <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="modal active">
-          <div className="modal-content">
+          <div className="modal-content bg-white">
             <i className="fa-solid fa-times modal-close" onClick={handleCloseAlert}></i>
             <WaitlistForm
               form={form}

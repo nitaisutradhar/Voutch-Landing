@@ -7,7 +7,7 @@ const VideoSection = ({ onOpenModal }: { onOpenModal: () => void }) => (
       playsInline
       className="w-full h-auto object-cover block"
     >
-      <source src="/bg-video.mp4" type="video/mp4" />
+      <source src="/Marco Carola and Black Coffee at Music On _ Destino Pacha Ibiza 2024.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div className="absolute inset-0 flex flex-col items-center justify-center">

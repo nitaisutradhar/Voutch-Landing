@@ -33,14 +33,12 @@ useEffect(() => {
   increment();
 }, []);
 
+console.log("Visits:", visits);
+
   return (
     <>
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
-        <div className="container mx-auto px-4 py-8 text-center">
-          <h1 className="text-xl font-bold mt-5">Welcome to my site 🚀</h1>
-          {visits !== null && <p>Visitor Count: {visits}</p>}
-        </div>
         <Hero />
         <CardSection userData={userData} setUserData={setUserData} />
         <FinalCTA onOpenModal={() => setModalOpen(true)} />

@@ -115,14 +115,14 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
       aria-modal="true"
       role="dialog"
     >
-      <div className="modal-content">
+      <div className="modal-content bg-white">
         {/* Close Button (top right) */}
         <i className="fa-solid fa-times modal-close" onClick={onClose}></i>
 
         {/* Step 1: Interest */}
         {step === 1 && (
           <div id="modal-step-1" className="modal-step active">
-            <h3>Awesome! Are you interested?</h3>
+            <h3 className="">Awesome! Are you interested?</h3>
             <p>
               Let us know if you&apos;d use Voutch to buy or sell tickets more
               easily on campus.
