@@ -16,11 +16,11 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
     // Shared data
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    phone: ""
-  });
+  // const [userData, setUserData] = useState({
+  //   name: "",
+  //   email: "",
+  //   phone: ""
+  // });
 
 
 //     const [visits, setVisits] = useState<number | null>(null);
@@ -39,13 +39,16 @@ export default function Home() {
       <VideoSection onOpenModal={() => setModalOpen(true)} />
       <main>
         <Hero />
-        <CardSection userData={userData} setUserData={setUserData} />
+        {/* <CardSection userData={userData} setUserData={setUserData} /> */}
+        <CardSection onOpenModal={() => setModalOpen(true)} />
+        {/* <SSAnimationSection /> */}
         <FinalCTA onOpenModal={() => setModalOpen(true)} />
         <SSAnimationSection />
         <HowItWorks />
       </main>
       <Footer />
-      <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} />
+      {/* <WaitlistModal setUserData={setUserData} open={modalOpen} onClose={() => setModalOpen(false)} /> */}
+      <WaitlistModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }

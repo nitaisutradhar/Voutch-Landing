@@ -7,13 +7,13 @@ import { createUser } from "@/server/users";
 interface WaitlistModalProps {
   open: boolean;
   onClose: () => void;
-  setUserData: (data: { name: string; email: string; phone: string }) => void;
+  // setUserData: (data: { name: string; email: string; phone: string }) => void;
 }
 
 const WaitlistModal: React.FC<WaitlistModalProps> = ({
   open,
   onClose,
-  setUserData,
+  // setUserData,
 }) => {
   // Modal Step: 1=Interest, 2=Form, 3=Confirmation
   const [step, setStep] = useState(1);
@@ -77,30 +77,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
       setStatus("error");
     }
 
-    try {
-      const res = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
-        {
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Public Key
-      );
-
-      if (res.status === 200) {
-        setStatus("success");
-        setForm({ name: "", email: "", phone: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus("error");
-    }
-
-    setUserData(form); // save to parent
+    // setUserData(form); // save to parent
     setStep(3);
   };
 

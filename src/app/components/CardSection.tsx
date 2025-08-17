@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { cardData } from "../data/cardData";
-import WaitlistForm from "./Waitlist/WaitlistForm";
-import emailjs from "@emailjs/browser";
-import { createUser } from "@/server/users";
+// import WaitlistForm from "./Waitlist/WaitlistForm";
+// import emailjs from "@emailjs/browser";
+// import { createUser } from "@/server/users";
 export interface Card {
   id: number;
   imgSrc: string;
@@ -15,76 +15,79 @@ export interface Card {
   };
   description?: string;
 }
+// interface CardSectionProps {
+//   userData: {
+//     name: string;
+//     email: string;
+//     phone: string;
+//   };
+//   setUserData: (data: { name: string; email: string; phone: string }) => void;
+// }
 interface CardSectionProps {
-  userData: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-  setUserData: (data: { name: string; email: string; phone: string }) => void;
+  onOpenModal: () => void;
 }
 
-const CardSection = ({ userData, setUserData }: CardSectionProps) => {
-  const [alertCard, setAlertCard] = useState<Card | null>(null);
-  const [status, setStatus] = useState<null | string>(null);
+const CardSection = ({ onOpenModal }: CardSectionProps) => {
+//   const [alertCard, setAlertCard] = useState<Card | null>(null);
+//   const [status, setStatus] = useState<null | string>(null);
   
-   const [form, setForm] = useState({
-  name: userData.name || "",
-  email: userData.email || "",
-  phone: userData.phone || ""
-});
+//    const [form, setForm] = useState({
+//   name: userData.name || "",
+//   email: userData.email || "",
+//   phone: userData.phone || ""
+// });
 
-useEffect(() => {
-  setForm({
-    name: userData.name || "",
-    email: userData.email || "",
-    phone: userData.phone || ""
-  });
-}, [userData]);
+// useEffect(() => {
+//   setForm({
+//     name: userData.name || "",
+//     email: userData.email || "",
+//     phone: userData.phone || ""
+//   });
+// }, [userData]);
 
-  const handleViewEvent = (card: Card) => {
-    setAlertCard(card);
-  };
-  const handleCloseAlert = () => {
-    setAlertCard(null);
-  };
+//   const handleViewEvent = (card: Card) => {
+//     setAlertCard(card);
+//   };
+//   const handleCloseAlert = () => {
+//     setAlertCard(null);
+//   };
 
-  // Handle form submission
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setStatus("sending");
+//   // Handle form submission
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setStatus("sending");
 
-  try {
-    // 1. Save to NeonDB first
-    const dbRes = await createUser(form);
+//   try {
+//     // 1. Save to NeonDB first
+//     const dbRes = await createUser(form);
 
-    if (dbRes?.error) {
-      setStatus("error");
-      return;
-    }
+//     if (dbRes?.error) {
+//       setStatus("error");
+//       return;
+//     }
 
-    // 2. Send Email only if DB save succeeded
-    const emailRes = await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      { name: form.name, email: form.email, phone: form.phone },
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    );
+//     // 2. Send Email only if DB save succeeded
+//     const emailRes = await emailjs.send(
+//       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+//       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+//       { name: form.name, email: form.email, phone: form.phone },
+//       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+//     );
 
-    if (emailRes.status === 200) {
-      setStatus("success");
-      setForm({ name: "", email: "", phone: "" });
-    } else {
-      setStatus("error");
-    }
-  } catch (error) {
-    console.error(error);
-    setStatus("error");
-  }
+//     if (emailRes.status === 200) {
+//       setStatus("success");
+//       setForm({ name: "", email: "", phone: "" });
+//     } else {
+//       setStatus("error");
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     setStatus("error");
+//   }
 
-  setUserData(form);
-  handleCloseAlert();
-};
+//   setUserData(form);
+//   handleCloseAlert();
+// };
 
   return (
     <section className="py-12 bg-transparent">
@@ -138,7 +141,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   <button
                     style={{ padding: "5px 10px", border: "1px solid gray" }}
                     className="btn text-black bg-white rounded-full text-[13px] hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer"
-                    onClick={() => handleViewEvent(card)}
+                    onClick={() => onOpenModal()}
                   >
                     {card.button.text}
                   </button>
@@ -150,7 +153,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       </div>
 
       {/* Alert Notification */}
-      {alertCard && (
+      {/* {alertCard && (
         // <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="modal active">
           <div className="modal-content bg-white">
@@ -163,7 +166,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </section>
   );
 };
