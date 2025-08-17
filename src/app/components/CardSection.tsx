@@ -3,6 +3,7 @@ import Image from "next/image";
 import { cardData } from "../data/cardData";
 import WaitlistForm from "./Waitlist/WaitlistForm";
 import emailjs from "@emailjs/browser";
+import { createUser } from "@/server/users";
 export interface Card {
   id: number;
   imgSrc: string;
@@ -49,38 +50,41 @@ useEffect(() => {
   };
 
   // Handle form submission
-  const handleSubmit =  async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setStatus("sending");
 
-        setStatus("sending");
+  try {
+    // 1. Save to NeonDB first
+    const dbRes = await createUser(form);
 
-    try {
-      const res = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
-        {
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Public Key
-      );
-
-      if (res.status === 200) {
-        setStatus("success");
-        setForm({ name: "", email: "", phone: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      console.error(error);
+    if (dbRes?.error) {
       setStatus("error");
+      return;
     }
 
+    // 2. Send Email only if DB save succeeded
+    const emailRes = await emailjs.send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      { name: form.name, email: form.email, phone: form.phone },
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    );
 
-    setUserData(form);
-    handleCloseAlert();
-  };
+    if (emailRes.status === 200) {
+      setStatus("success");
+      setForm({ name: "", email: "", phone: "" });
+    } else {
+      setStatus("error");
+    }
+  } catch (error) {
+    console.error(error);
+    setStatus("error");
+  }
+
+  setUserData(form);
+  handleCloseAlert();
+};
 
   return (
     <section className="py-12 bg-transparent">

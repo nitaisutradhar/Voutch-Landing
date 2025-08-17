@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import WaitlistForm from "./WaitlistForm";
 import emailjs from "@emailjs/browser";
+import { createUser } from "@/server/users";
 
 interface WaitlistModalProps {
   open: boolean;
@@ -47,6 +48,34 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({
     e.preventDefault();
 
     setStatus("sending");
+
+    try {
+      // 1. Save to NeonDB first
+      const dbRes = await createUser(form);
+      console.log("DB Response:", dbRes);
+
+      // 2. Send email via EmailJS
+      const res = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      if (res.status === 200) {
+        setStatus("success");
+        setForm({ name: "", email: "", phone: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
 
     try {
       const res = await emailjs.send(

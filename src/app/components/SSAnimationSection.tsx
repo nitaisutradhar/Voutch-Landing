@@ -90,8 +90,8 @@ const DesktopScreenshots = () => {
 
         {/* Screenshot 2 */}
         <motion.div
-          initial={{ scale: 1.15 }}
-          animate={{ scale: [1.15, 0.95, 1.0, 1.0] }}
+          initial={{ scale: 1.2 }}
+          animate={{ scale: [1.2, 0.95, 1.0, 1.0] }}
           transition={{
             duration: cycleDuration / 1000,
             repeat: Infinity,
